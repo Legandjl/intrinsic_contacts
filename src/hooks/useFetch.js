@@ -6,33 +6,39 @@ const useFetch = () => {
   const nav = useNavigate();
 
   const fetchData = async (params, options, cb) => {
+    //function has an optional paramater "cb"
+    //if null, will perform default error handling
+    // else cb will execute
     options.mode = "cors";
     try {
-      const url = `https://interview.intrinsiccloud.net/swagger-ui/#/${params}`;
+      const url = `https://interview.intrinsiccloud.net/${params}`;
       setLoading(true);
       const data = await fetch(url, options);
       if (data.status === 401) {
-        console.log("err");
+        console.error(401);
         setLoading(false);
         //cb ? cb.401():
         //!cb &&
         nav(`/unauthorised`, { replace: true });
-        return;
+        return null;
       }
       if (data.status === 400) {
+        console.error(400);
         setLoading(false);
-        return;
+        return null;
       }
 
       if (data.status === 403) {
+        console.error(403);
         setLoading(false);
         //nav(`/403`, { replace: true });
-        return;
+        return null;
       }
       if (data.status === 404) {
+        console.error(404);
         setLoading(false);
         //nav(`/404`, { replace: true });
-        return;
+        return null;
       }
 
       const jsonData = await data.json();
@@ -40,8 +46,9 @@ const useFetch = () => {
       return jsonData;
     } catch (e) {
       //cb ? cb() : nav oops
+      console.error("catch block");
       setLoading(false);
-      return;
+      return null;
     }
   };
   return [fetchData, loading];
