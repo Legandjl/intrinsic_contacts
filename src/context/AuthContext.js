@@ -55,7 +55,6 @@ const AuthContextProvider = (props) => {
       setLoading(true);
       const localToken = localStorage.getItem(LOCAL_TOKEN);
       const localUser = localStorage.getItem(LOCAL_USER);
-      console.log(localUser);
       if (!localToken || !localUser) {
         console.log("nothing");
         return;

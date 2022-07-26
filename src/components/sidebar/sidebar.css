@@ -20,3 +20,9 @@
     justify-self: end;
     cursor: pointer;
 }
+
+.contact_link {
+    height:3em;
+    width:100%;
+    background-color: orange;
+}
