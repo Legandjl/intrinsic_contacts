@@ -1,0 +1,9 @@
+.home {
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: 25em 1fr;   
+        position: relative;
+ 
+        background-color: white;     
+}
+

@@ -1,0 +1,7 @@
+.loginWrap {
+    height:100vh;
+    display: grid;
+    align-content: center;
+    background-color: white;
+    justify-self: center;
+}

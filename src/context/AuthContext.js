@@ -73,7 +73,7 @@ const AuthContextProvider = (props) => {
           setLocal(LOCAL_USER, "");
         }
       );
-      console.log(testLogin);
+
       if (testLogin) {
         //Authenticated
         setLocal(LOCAL_TOKEN, localToken);

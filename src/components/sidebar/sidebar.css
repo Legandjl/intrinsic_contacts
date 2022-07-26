@@ -1,0 +1,22 @@
+.sidebar {
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.sidebar_header {
+    background-color: aqua;
+    height:3em;
+    display: grid;
+
+}
+
+.sidebar_inner {
+    background-color: red;
+}
+
+.sidebar_header i {
+    color:black;
+    justify-self: end;
+    cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import useInput from "../../hooks/useInput";
@@ -11,13 +11,15 @@ const Login = () => {
   const nav = useNavigate();
 
   useEffect(() => {
+    //if token is present and authcontext is not loading, nav to home
     if (token && !loading) {
       nav(`/home`, { replace: true });
     }
   }, [loading, nav, token]);
+
   return (
     <div className="loginWrap">
-      {!loading && (
+      {!token && (
         <input
           name={"username"}
           type="text"
@@ -26,7 +28,7 @@ const Login = () => {
           value={username}
         />
       )}
-      {!loading && (
+      {!token && (
         <input
           name={"password"}
           type="password"
@@ -36,7 +38,7 @@ const Login = () => {
         />
       )}
 
-      {!token && !loading && (
+      {!token && (
         <button
           onClick={() => {
             login(username, password);
