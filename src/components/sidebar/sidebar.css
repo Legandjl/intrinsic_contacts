@@ -26,6 +26,9 @@
     border: solid 1px rgba(173, 169, 169, 0.425);
     border-top: none;
     overflow-y: scroll;
+    overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
 .sidebar-header-add {
     justify-self: end;

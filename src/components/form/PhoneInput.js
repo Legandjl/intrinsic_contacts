@@ -1,30 +1,27 @@
 import { useEffect, useReducer } from "react";
 
-const initialFormState = {
-  areaCode: "",
-  category: "",
-  countryCode: "",
-  extension: "",
-  id: "",
-  number: "",
+const phones = {
+  home: <i class="ri-phone-fill"></i>,
+  work: <i class="ri-building-fill"></i>,
+  mobile: <i class="ri-cellphone-fill"></i>,
+  whatsapp: <i class="ri-whatsapp-fill"></i>,
 };
 
-const reducer = (state, action) => {
-  return { ...state, [action.field]: action.value };
-};
-
-const PhoneInput = () => {
-  const [state, dispatch] = useReducer(reducer, initialFormState);
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
-  const handleChange = (e) => {
-    dispatch({ field: e.target.name, value: e.target.value });
-  };
-
-  return <div className="phoneInput"></div>;
+const PhoneInput = (props) => {
+  return (
+    <div className="form-input">
+      <div className="input-header">{phones[props.category]}</div>
+      <input
+        data-category={props.category}
+        name={"number"}
+        type="text"
+        value={props.value}
+        onChange={props.handleChange}
+        placeholder={props.placeholder}
+        required
+      />
+    </div>
+  );
 };
 
 export default PhoneInput;

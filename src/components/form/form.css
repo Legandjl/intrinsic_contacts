@@ -1,29 +1,74 @@
 .contact-form {
     grid-column: 2;   
     display: grid;
+    padding:2em;
 }
 .contact-form form {
     display: grid;
     grid-template-columns: 1fr;
     justify-self: center;
     align-self: center;
-    grid-gap: 6px;
+    grid-gap: 12px;
+    width:40em;
+
 
 }
 
 .form-input {
    justify-self: end;
    display: grid;
-   grid-template-columns: 1fr;
-   grid-template-rows: 1fr 1fr;
+   grid-template-columns: auto 1fr;
+   width:100%;
+   position: relative;
+ 
 
 }
 
 
+.input-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width:100%;
+  
 
+  
 
-.cancel {
-    height:5em;
-    width:5em;
-    background-color: red;
 }
+
+.input-header i {
+    position: absolute;
+    bottom:5px;
+    left:5px;
+    
+
+}
+input[type=text] {
+  
+    border-bottom: solid 1px rgba(0, 0, 0, 0.098);
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 25px;
+
+
+}
+
+input[type=text]:hover {
+
+
+    background-color: #E6E4E4;
+}
+
+label {
+  
+    align-self: center;
+  
+}
+
+.general-input {
+    grid-column: 1/-1;
+}
+
+.contact-form button {
+    grid-column: 1/-1;
+}
+
