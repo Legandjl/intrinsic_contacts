@@ -1,6 +1,27 @@
-.contact_form {
-    background-color: purple;
+.contact-form {
+    grid-column: 2;   
+    display: grid;
 }
+.contact-form form {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-self: center;
+    align-self: center;
+    grid-gap: 6px;
+
+}
+
+.form-input {
+   justify-self: end;
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: 1fr 1fr;
+
+}
+
+
+
+
 .cancel {
     height:5em;
     width:5em;
