@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "../../context/AuthContext";
-import { ContactContextProvider } from "../../context/ContactsContext";
+import { ContactContextProvider } from "../../context/ContactContext";
 
 import Display from "../display/Display";
-import ContactForm from "../form/ContactForm";
+
+import ContactForm2 from "../form/ContactForm2";
 import Header from "../header/Header";
 import Home from "../home/Home";
 import Login from "../login/Login";
@@ -20,9 +21,9 @@ const App = () => {
             <Route element={<Protected />}>
               <Route path="home" element={<Home />}>
                 <Route index element={<Display />} />
-                <Route path="user/:id" element={<Display />} />
-                <Route path="new/:id" element={<ContactForm />} />
-                <Route path="new" element={<ContactForm />} />
+                <Route path="contact/:id" element={<Display />} />
+                <Route path="new/:id" element={<ContactForm2 />} />
+                <Route path="new" element={<ContactForm2 />} />
               </Route>
             </Route>
             <Route path={"/"} element={<Login />} />

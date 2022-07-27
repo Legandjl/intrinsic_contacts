@@ -1,17 +1,18 @@
 import { useContext } from "react";
-import { ContentContext } from "../../context/ContactsContext";
+import { ContactContext, ContentContext } from "../../context/ContactContext";
+import Contact from "../contacts/Contact";
 import "./sidebar.css";
 import SidebarHeader from "./SidebarHeader";
 const Sidebar = () => {
-  const { contacts } = useContext(ContentContext);
+  const { contacts } = useContext(ContactContext);
   const contactLinks = contacts.map((item) => {
-    return <div className="contact_link"></div>;
+    return <Contact data={item} />;
   });
 
   return (
     <div className="sidebar">
       <SidebarHeader />
-      <div className="sidebar_inner">{contactLinks}</div>
+      <div className="sidebar-inner">{contactLinks}</div>
     </div>
   );
 };

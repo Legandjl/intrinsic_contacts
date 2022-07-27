@@ -1,4 +1,6 @@
 .display {
-    background-color: blue;
+
+    grid-column: 2;
+
 
 }

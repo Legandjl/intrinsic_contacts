@@ -33,6 +33,7 @@ const AuthContextProvider = (props) => {
       },
       null
     );
+    console.log(loginData);
     setLocal(LOCAL_TOKEN, loginData.token);
     setLocal(LOCAL_USER, loginData.username);
     setUser(loginData.username);
@@ -57,10 +58,14 @@ const AuthContextProvider = (props) => {
       const localUser = localStorage.getItem(LOCAL_USER);
       if (!localToken || !localUser) {
         console.log("nothing");
+        setToken(null);
+        setUser(null);
+        setLoading(false);
         return;
       }
+      console.log(localUser);
       const testLogin = await fetchData(
-        `profile?name=${localUser.displayName}`,
+        `profile?name=${localUser}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${localToken}` },
@@ -75,17 +80,16 @@ const AuthContextProvider = (props) => {
 
       if (testLogin) {
         //Authenticated
-        setLocal(LOCAL_TOKEN, localToken);
-        setLocal(LOCAL_USER, testLogin);
         setToken(localToken);
         setUser(localUser);
       }
+      console.log(user);
       setLoading(false);
     };
     if (!loading && !token) {
       attemptLogin();
     }
-  }, [fetchData, loading, token]);
+  }, [fetchData, loading, token, user]);
 
   return (
     <AuthContext.Provider value={{ logout, login, token, loading, user }}>
