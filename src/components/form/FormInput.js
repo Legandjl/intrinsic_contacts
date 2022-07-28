@@ -6,13 +6,15 @@ const FormInput = (props) => {
   };
 
   return (
-    <div className="form-input general-input">
-      <div className="input-header">{icons[props.placeholder]}</div>
+    <div className="form-input ">
+      {icons[props.placeholder.toLowerCase()]}
       <input
+        className="general-input"
         name={props.name}
         type="text"
         value={props.value}
         onChange={props.handleChange}
+        placeholder={props.placeholder}
         required
       />
     </div>

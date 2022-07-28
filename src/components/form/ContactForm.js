@@ -11,53 +11,54 @@ const ContactForm2 = () => {
       <form>
         <FormInput
           name={"company"}
-          label={"Company"}
           value={formState.company}
           handleChange={handleChange}
-          placeholder={"company"}
+          placeholder={"Company"}
         />
         <FormInput
           name={"contactName"}
-          label={"Name"}
           value={formState.contactName}
           handleChange={handleChange}
-          placeholder={"name"}
+          placeholder={"Name"}
         />
 
         <FormInput
           name={"primaryEmailAddress"}
-          label={"Email"}
           value={formState.primaryEmailAddress}
           handleChange={handleChange}
-          placeholder={"email"}
+          placeholder={"Email"}
         />
 
         <PhoneInput
           category={"home"}
           label={"Home"}
-          value={formState.phoneNumbers[0].number}
+          data={formState.phoneNumbers[0]}
           handleChange={handleChange}
+          placeholder={"Home"}
         />
 
         <PhoneInput
           category={"work"}
           label={"Work"}
-          value={formState.phoneNumbers[1].number}
+          data={formState.phoneNumbers[1]}
           handleChange={handleChange}
+          placeholder={"Work"}
         />
 
         <PhoneInput
           category={"whatsapp"}
           label={"Whatsapp"}
-          value={formState.phoneNumbers[2].number}
+          data={formState.phoneNumbers[2]}
           handleChange={handleChange}
+          placeholder={"Whatsapp"}
         />
 
         <PhoneInput
           category={"mobile"}
           label={"Mobile"}
-          value={formState.phoneNumbers[3].number}
+          data={formState.phoneNumbers[3]}
           handleChange={handleChange}
+          placeholder={"Mobile"}
         />
 
         <button onClick={handleSubmit}> SUBMIT</button>

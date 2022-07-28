@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import useDataLoad from "../hooks/useDataLoad";
 import useFetch from "../hooks/useFetch";
@@ -19,6 +19,15 @@ const ContactContextProvider = (props) => {
       },
       null
     );
+
+  const [countries, refreshCountries, loadingCountries] = useDataLoad(
+    `utility/countries`,
+    {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    },
+    null
+  );
 
   const removeContact = async (id) => {
     await fetchData(
@@ -61,6 +70,7 @@ const ContactContextProvider = (props) => {
         addNew,
         removeContact,
         loadingContacts,
+        countries,
       }}
     >
       {props.children}

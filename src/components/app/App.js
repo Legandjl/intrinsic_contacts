@@ -4,7 +4,7 @@ import { ContactContextProvider } from "../../context/ContactContext";
 
 import Display from "../display/Display";
 
-import ContactForm2 from "../form/ContactForm2";
+import ContactForm2 from "../form/ContactForm";
 import Header from "../header/Header";
 import Home from "../home/Home";
 import Login from "../login/Login";

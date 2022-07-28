@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer, useState } from "react";
-import useDataLoad from "./useDataLoad";
+
 import { v4 as uuidv4 } from "uuid";
 import { AuthContext } from "../context/AuthContext";
 import { ContactContext } from "../context/ContactContext";
@@ -47,15 +47,6 @@ const useFormState = () => {
   const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
 
-  const [data, refresh, loading, error, addOne, removeOne] = useDataLoad(
-    `utility/countries`,
-    {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    },
-    null
-  );
-
   const formErrors = { nameValid, emailValid };
 
   const handleChange = (e) => {
@@ -77,7 +68,7 @@ const useFormState = () => {
     e.preventDefault();
     await addNew(state);
   };
-  return [state, handleChange, handleSubmit, formErrors, loading];
+  return [state, handleChange, handleSubmit, formErrors];
 };
 
 export default useFormState;
