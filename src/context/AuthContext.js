@@ -33,7 +33,7 @@ const AuthContextProvider = (props) => {
       },
       null
     );
-    console.log(loginData);
+
     setLocal(LOCAL_TOKEN, loginData.token);
     setLocal(LOCAL_USER, loginData.username);
     setUser(loginData.username);
@@ -51,16 +51,14 @@ const AuthContextProvider = (props) => {
 
   useEffect(() => {
     // Attempt to fetch data from a protected resource
+    const reset = () => {};
     const attemptLogin = async () => {
       console.log("trying to login");
       setLoading(true);
       const localToken = localStorage.getItem(LOCAL_TOKEN);
       const localUser = localStorage.getItem(LOCAL_USER);
       if (!localToken || !localUser) {
-        console.log("nothing");
-        setToken(null);
-        setUser(null);
-        setLoading(false);
+        reset();
         return;
       }
       console.log(localUser);
@@ -70,12 +68,7 @@ const AuthContextProvider = (props) => {
           method: "GET",
           headers: { Authorization: `Bearer ${localToken}` },
         },
-        () => {
-          setToken(null);
-          setLocal(LOCAL_TOKEN, "");
-          setUser(null);
-          setLocal(LOCAL_USER, "");
-        }
+        reset
       );
 
       if (testLogin) {
@@ -83,7 +76,6 @@ const AuthContextProvider = (props) => {
         setToken(localToken);
         setUser(localUser);
       }
-      console.log(user);
       setLoading(false);
     };
     if (!loading && !token) {

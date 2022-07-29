@@ -82,6 +82,18 @@ label {
     cursor: pointer;
     position: relative; 
     display: grid;
+    width:6em;
+}
+
+.country-menu-item {
+    padding:4px;
+    border-radius: 3px;
+
+
+}
+.country-menu-item:hover{
+    background-color: white;
+
 }
 
 .search-box {
@@ -91,12 +103,13 @@ label {
 
 .search-menu {
     max-height: 7em;
+    width: max-content;
     left:0;
     position: absolute;
     z-index: 1;
     overflow-y: scroll;
     background-color: #E6E4E4;
-    padding:10px;
+   padding:4px; 
     top:120%;
     overflow-y: scroll;
     overflow-y: scroll;
@@ -112,4 +125,19 @@ label {
 .country-display {
 
     align-self: center;
+}
+
+.submit-button {
+    width:6em;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: solid 1px rgba(173, 169, 169, 0.425);
+    justify-self: center;
+    height:2em;
+    cursor: pointer;
+
+}
+
+.submit-button:active {
+    box-shadow: none;
+
 }

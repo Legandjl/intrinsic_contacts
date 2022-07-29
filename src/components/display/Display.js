@@ -1,9 +1,13 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./display.css";
 const Display = () => {
   const { id } = useParams();
 
-  return <div className="display"></div>;
+  return (
+    <div className="display">
+      <Link to={`/home/new/${id}`}>LINK</Link>
+    </div>
+  );
 };
 
 export default Display;

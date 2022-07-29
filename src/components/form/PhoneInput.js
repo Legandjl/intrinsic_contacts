@@ -13,12 +13,25 @@ const phones = {
 
 const PhoneInput = (props) => {
   const { countries } = useContext(ContactContext);
-  const [showMenu, toggleOn] = useShowMenu();
+  const [showMenu, toggleOn, toggleOff] = useShowMenu();
   const [countriesFiltered, setCountriesFiltered] = useState(countries);
   const [countryValue, handleChange, reset, isValid] = useInput();
+  const [placeholder, setPlaceholder] = useState(
+    `${countries[233].flagCode}  ${countries[233].dialCode}`
+  );
   const countryElements = countriesFiltered.map((country) => {
-    return <Country country={country} />;
+    return (
+      <Country
+        country={country}
+        handleDetail={props.handleDetail}
+        category={props.category}
+        setPlaceholder={setPlaceholder}
+        toggleOff={toggleOff}
+      />
+    );
   });
+
+  console.log(showMenu);
 
   useEffect(() => {
     setCountriesFiltered((prev) => {
@@ -38,7 +51,9 @@ const PhoneInput = (props) => {
     <div className="form-input">
       <div
         onClick={() => {
-          toggleOn();
+          if (!showMenu) {
+            toggleOn();
+          }
         }}
         className="country-menu"
       >
@@ -50,12 +65,10 @@ const PhoneInput = (props) => {
             value={countryValue}
             onChange={handleChange}
             maxLength={2}
-            placeholder={`${countries[233].flagCode}  ${countries[233].dialCode}`}
+            placeholder={placeholder}
           />
         ) : (
-          <p className="country-display">
-            {`${countries[233].flagCode}  ${countries[233].dialCode}`}
-          </p>
+          <p className="country-display">{placeholder}</p>
         )}
         {showMenu && (
           <div data-menu={true} className="search-menu">
