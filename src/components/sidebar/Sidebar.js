@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ContactContext, ContentContext } from "../../context/ContactContext";
+import { ContactContext } from "../../context/ContactContext";
 import Contact from "../contacts/Contact";
 import "./sidebar.css";
 import SidebarHeader from "./SidebarHeader";

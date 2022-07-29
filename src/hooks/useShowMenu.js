@@ -6,7 +6,6 @@ const useShowMenu = () => {
 
   useEffect(() => {
     const handleClick = (e) => {
-      console.log("USEFFECT");
       if (!e.target.dataset.menu && e.target !== menuRef.current) {
         setShowMenu(false);
       }
@@ -24,7 +23,6 @@ const useShowMenu = () => {
 
   const toggleOff = (e) => {
     setShowMenu(false);
-    console.log(showMenu + "after change");
   };
 
   const reset = () => {

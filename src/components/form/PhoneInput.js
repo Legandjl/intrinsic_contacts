@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContactContext } from "../../context/ContactContext";
 import useInput from "../../hooks/useInput";
 import useShowMenu from "../../hooks/useShowMenu";
@@ -16,9 +16,19 @@ const PhoneInput = (props) => {
   const [showMenu, toggleOn, toggleOff] = useShowMenu();
   const [countriesFiltered, setCountriesFiltered] = useState(countries);
   const [countryValue, handleChange, reset, isValid] = useInput();
-  const [placeholder, setPlaceholder] = useState(
-    `${countries[233].flagCode}  ${countries[233].dialCode}`
-  );
+  const [placeholder, setPlaceholder] = useState(null);
+
+  useEffect(() => {
+    const placeholder = countriesFiltered.filter((country) => {
+      return country.isoCode === props.data.countryCode;
+    });
+    if (placeholder.length > 0) {
+      setPlaceholder(placeholder[0].flagCode + " " + placeholder[0].dialCode);
+    } else {
+      setPlaceholder(`${countries[233].flagCode}  ${countries[233].dialCode}`);
+    }
+  }, [countries, countriesFiltered, props.data.countryCode]);
+
   const countryElements = countriesFiltered.map((country) => {
     return (
       <Country
@@ -30,8 +40,6 @@ const PhoneInput = (props) => {
       />
     );
   });
-
-  console.log(showMenu);
 
   useEffect(() => {
     setCountriesFiltered((prev) => {

@@ -1,10 +1,13 @@
-import useFormState from "../../hooks/useContactForm";
+import useContactForm from "../../hooks/useContactForm";
 import "./form.css";
 import FormInput from "./FormInput";
 import PhoneInput from "./PhoneInput";
 
 const ContactForm2 = () => {
-  const [formState, handleChange, handleSubmit, handleDetail] = useFormState();
+  const [formState, handleChange, handleSubmit, handleDetail] =
+    useContactForm();
+
+  console.log(formState.id);
 
   return (
     <div className="contact-form">
@@ -65,7 +68,12 @@ const ContactForm2 = () => {
           placeholder={"Mobile"}
         />
 
-        <button className="submit-button" onClick={handleSubmit}>
+        <button
+          className="submit-button"
+          onClick={(e) => {
+            handleSubmit(e, formState.id);
+          }}
+        >
           {" "}
           SUBMIT
         </button>

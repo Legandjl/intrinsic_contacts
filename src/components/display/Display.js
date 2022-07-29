@@ -5,7 +5,7 @@ const Display = () => {
 
   return (
     <div className="display">
-      <Link to={`/home/new/${id}`}>LINK</Link>
+      <Link to={`/home/contact/edit/${id}`}>LINK</Link>
     </div>
   );
 };

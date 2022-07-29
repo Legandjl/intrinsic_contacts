@@ -9,6 +9,7 @@ const ContactContext = React.createContext();
 const ContactContextProvider = (props) => {
   const { user, token } = useContext(AuthContext);
   const [fetchData, loadingData] = useFetch();
+
   const nav = useNavigate();
   const [contacts, refresh, loadingContacts, error, addOne, removeOne] =
     useDataLoad(
@@ -20,7 +21,7 @@ const ContactContextProvider = (props) => {
       null
     );
 
-  const [countries, refreshCountries, loadingCountries] = useDataLoad(
+  const [countries] = useDataLoad(
     `utility/countries`,
     {
       method: "GET",
@@ -45,11 +46,11 @@ const ContactContextProvider = (props) => {
     nav(`/home`, { replace: true });
   };
 
-  const addNew = async (contactDetails) => {
+  const submitContact = async (contactDetails, id) => {
     await fetchData(
-      `contacts?name=${user}`,
+      `contacts${id !== undefined ? `/${id}` : ""}?name=${user}`,
       {
-        method: "POST",
+        method: id ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -67,7 +68,7 @@ const ContactContextProvider = (props) => {
         contacts,
         addOne,
         removeOne,
-        addNew,
+        submitContact,
         removeContact,
         loadingContacts,
         countries,

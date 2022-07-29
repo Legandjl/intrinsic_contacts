@@ -53,7 +53,6 @@ const AuthContextProvider = (props) => {
     // Attempt to fetch data from a protected resource
     const reset = () => {};
     const attemptLogin = async () => {
-      console.log("trying to login");
       setLoading(true);
       const localToken = localStorage.getItem(LOCAL_TOKEN);
       const localUser = localStorage.getItem(LOCAL_USER);
@@ -61,7 +60,7 @@ const AuthContextProvider = (props) => {
         reset();
         return;
       }
-      console.log(localUser);
+
       const testLogin = await fetchData(
         `profile?name=${localUser}`,
         {

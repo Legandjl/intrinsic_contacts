@@ -19,10 +19,16 @@ const initialFormState = {
   phoneNumbers: [...phones],
 };
 
+const CASES = {
+  UPDATE_PHONE: "UPDATE_PHONE",
+  UPDATE_PHONE_DETAILS: "UPDATE_PHONE_DETAILS",
+  SET_INITIAL_STATE: "SET_INITIAL_STATE",
+};
+
 const reducer = (state, action) => {
   let updatedPhones;
   switch (action.type) {
-    case `UPDATE_PHONE`:
+    case CASES.UPDATE_PHONE:
       updatedPhones = state.phoneNumbers.map((item) => {
         if (item.category.toLowerCase() === action.payload) {
           return { ...item, [action.field]: action.value };
@@ -33,7 +39,7 @@ const reducer = (state, action) => {
         ...state,
         phoneNumbers: updatedPhones,
       };
-    case `UPDATE_PHONE_DETAILS`:
+    case CASES.UPDATE_PHONE_DETAILS:
       updatedPhones = state.phoneNumbers.map((item) => {
         if (item.category.toLowerCase() === action.payload) {
           return {
@@ -49,7 +55,7 @@ const reducer = (state, action) => {
         phoneNumbers: updatedPhones,
       };
 
-    case "SET_EDIT_STATE":
+    case CASES.SET_INITIAL_STATE:
       return { ...action.value };
 
     default:
@@ -57,17 +63,17 @@ const reducer = (state, action) => {
   }
 };
 
-const useFormState = () => {
+const useContactForm = () => {
   const [state, dispatch] = useReducer(reducer, initialFormState);
   const [loading, setLoading] = useState(true);
-  const { contacts, addNew } = useContext(ContactContext);
+  const { contacts, submitContact } = useContext(ContactContext);
   const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const formErrors = { nameValid, emailValid };
   const { id } = useParams();
 
   useEffect(() => {
-    if (id && loading) {
+    if (id) {
       const editFormState = contacts.filter((contact) => {
         return contact.id === id;
       });
@@ -84,7 +90,12 @@ const useFormState = () => {
       });
       dispatch({
         value: { ...editFormState[0], phoneNumbers: phoneNumbers },
-        type: "SET_EDIT_STATE",
+        type: CASES.SET_INITIAL_STATE,
+      });
+    } else if (!id) {
+      dispatch({
+        value: { ...initialFormState },
+        type: CASES.SET_INITIAL_STATE,
       });
     }
     setLoading(false);
@@ -96,7 +107,7 @@ const useFormState = () => {
       field: e.target.name,
       value: e.target.value,
       payload: category && e.target.dataset.category,
-      type: category && "UPDATE_PHONE",
+      type: category && CASES.UPDATE_PHONE,
     });
   };
 
@@ -104,7 +115,7 @@ const useFormState = () => {
     dispatch({
       value: data,
       payload: category,
-      type: "UPDATE_PHONE_DETAILS",
+      type: CASES.UPDATE_PHONE_DETAILS,
     });
   };
 
@@ -113,11 +124,11 @@ const useFormState = () => {
     setEmailValid(state.primaryEmailAddress.length > 0);
   }, [state]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, id) => {
     e.preventDefault();
-    await addNew(state);
+    await submitContact(state, id);
   };
   return [state, handleChange, handleSubmit, handleDetail, formErrors];
 };
 
-export default useFormState;
+export default useContactForm;
