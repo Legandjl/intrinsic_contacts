@@ -1,13 +1,33 @@
+import { useParams } from "react-router-dom";
 import useContactForm from "../../hooks/useContactForm";
 import "./form.css";
 import FormInput from "./FormInput";
 import PhoneInput from "./PhoneInput";
 
 const ContactForm2 = () => {
-  const [formState, handleChange, handleSubmit, handleDetail] =
-    useContactForm();
+  const [
+    formState,
+    handleChange,
+    handleSubmit,
+    handleDetail,
+    loadingFormState,
+  ] = useContactForm();
 
-  console.log(formState.id);
+  const { id } = useParams();
+
+  const phoneNumbers = formState.phoneNumbers.map((number) => {
+    return (
+      <PhoneInput
+        data={number}
+        handleChange={handleChange}
+        handleDetail={handleDetail}
+        category={number.category.toLowerCase()}
+        placeholder={number.category.toLowerCase()}
+        label={number.category.toLowerCase()}
+        loading={loadingFormState}
+      />
+    );
+  });
 
   return (
     <div className="contact-form">
@@ -31,43 +51,7 @@ const ContactForm2 = () => {
           handleChange={handleChange}
           placeholder={"Email"}
         />
-
-        <PhoneInput
-          category={"home"}
-          label={"Home"}
-          data={formState.phoneNumbers[0]}
-          handleChange={handleChange}
-          handleDetail={handleDetail}
-          placeholder={"Home"}
-        />
-
-        <PhoneInput
-          category={"work"}
-          label={"Work"}
-          data={formState.phoneNumbers[1]}
-          handleChange={handleChange}
-          handleDetail={handleDetail}
-          placeholder={"Work"}
-        />
-
-        <PhoneInput
-          category={"whatsapp"}
-          label={"Whatsapp"}
-          data={formState.phoneNumbers[2]}
-          handleChange={handleChange}
-          handleDetail={handleDetail}
-          placeholder={"Whatsapp"}
-        />
-
-        <PhoneInput
-          category={"mobile"}
-          label={"Mobile"}
-          data={formState.phoneNumbers[3]}
-          handleChange={handleChange}
-          handleDetail={handleDetail}
-          placeholder={"Mobile"}
-        />
-
+        {phoneNumbers}
         <button
           className="submit-button"
           onClick={(e) => {
@@ -75,7 +59,7 @@ const ContactForm2 = () => {
           }}
         >
           {" "}
-          SUBMIT
+          {id ? "Update" : "Submit"}
         </button>
       </form>
     </div>

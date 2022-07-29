@@ -7,7 +7,6 @@ const useDataLoad = (url, options) => {
   const [loading, setLoading] = useState(true);
   const [fetchData, fetchInProgress, error] = useFetch();
   const { user } = useContext(AuthContext);
-  //brought in user to prevent contacts context bug, simplest solution
 
   const refresh = () => {
     setLoading(true);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useDataLoad from "../hooks/useDataLoad";
 import useFetch from "../hooks/useFetch";
@@ -21,7 +21,7 @@ const ContactContextProvider = (props) => {
       null
     );
 
-  const [countries] = useDataLoad(
+  const [countries, refreshCountries, loadingCountries] = useDataLoad(
     `utility/countries`,
     {
       method: "GET",
@@ -42,8 +42,16 @@ const ContactContextProvider = (props) => {
       },
       null
     );
+    const index = contacts.map((object) => object.id).indexOf(id);
     removeOne(id);
-    nav(`/home`, { replace: true });
+    console.log(index);
+
+    if (index === 0) {
+      console.log(id + "is 0");
+      nav(`/home/welcome`, { replace: true });
+      return;
+    }
+    nav(`/home/contact/${contacts[index - 1].id}`, { replace: true });
   };
 
   const submitContact = async (contactDetails, id) => {
@@ -59,7 +67,27 @@ const ContactContextProvider = (props) => {
       },
       null
     );
+
     refresh();
+  };
+
+  const formatPhoneNumber = (number) => {
+    let regex = /[#-]/;
+    const splitNumber = number.phoneNumberFormatted.split(regex);
+    return {
+      category: number.category,
+      areaCode: splitNumber[1] || "",
+      countryCode: splitNumber[0] || "",
+      extension: splitNumber[3] || "",
+      number: splitNumber[2] || "",
+    };
+  };
+
+  const getCountry = (iso) => {
+    const country = countries.filter((country) => {
+      return (countries.isoCode = iso);
+    });
+    return country[0];
   };
 
   return (
@@ -72,6 +100,8 @@ const ContactContextProvider = (props) => {
         removeContact,
         loadingContacts,
         countries,
+        getCountry,
+        formatPhoneNumber,
       }}
     >
       {props.children}

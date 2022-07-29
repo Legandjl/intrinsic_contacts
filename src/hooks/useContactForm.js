@@ -66,27 +66,20 @@ const reducer = (state, action) => {
 const useContactForm = () => {
   const [state, dispatch] = useReducer(reducer, initialFormState);
   const [loading, setLoading] = useState(true);
-  const { contacts, submitContact } = useContext(ContactContext);
+  const { contacts, submitContact, formatPhoneNumber, loadingContacts } =
+    useContext(ContactContext);
   const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const formErrors = { nameValid, emailValid };
   const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
+    if (id && loading) {
       const editFormState = contacts.filter((contact) => {
         return contact.id === id;
       });
       const phoneNumbers = editFormState[0].phoneNumbers.map((number) => {
-        let regex = /[#-]/;
-        const splitNumber = number.phoneNumberFormatted.split(regex);
-        return {
-          category: number.category,
-          areaCode: splitNumber[1] || "",
-          countryCode: splitNumber[0] || "",
-          extension: splitNumber[3] || "",
-          number: splitNumber[2] || "",
-        };
+        return formatPhoneNumber(number);
       });
       dispatch({
         value: { ...editFormState[0], phoneNumbers: phoneNumbers },
@@ -99,7 +92,7 @@ const useContactForm = () => {
       });
     }
     setLoading(false);
-  }, [contacts, id, loading]);
+  }, [contacts, formatPhoneNumber, id, loading]);
 
   const handleChange = (e) => {
     const category = e.target.dataset.category;
@@ -128,7 +121,7 @@ const useContactForm = () => {
     e.preventDefault();
     await submitContact(state, id);
   };
-  return [state, handleChange, handleSubmit, handleDetail, formErrors];
+  return [state, handleChange, handleSubmit, handleDetail, loading];
 };
 
 export default useContactForm;

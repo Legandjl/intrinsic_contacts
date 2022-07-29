@@ -4,7 +4,6 @@ const Country = (props) => {
     props.setPlaceholder(
       `${props.country.flagCode}  ${props.country.dialCode}`
     );
-
     props.toggleOff();
   };
 

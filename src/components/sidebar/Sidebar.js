@@ -6,7 +6,7 @@ import SidebarHeader from "./SidebarHeader";
 const Sidebar = () => {
   const { contacts } = useContext(ContactContext);
   const contactLinks = contacts.map((item) => {
-    return <Contact data={item} />;
+    return <Contact data={item} key={item.id} />;
   });
 
   return (
