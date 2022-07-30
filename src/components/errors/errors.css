@@ -1,0 +1,47 @@
+.error-page {
+        display: grid;   
+        align-self: center;
+        grid-auto-rows: min-content;
+        align-items: center;
+        grid-gap: 15px;
+        grid-row: 1;   
+        justify-self: center;
+        margin-top: 20em;
+        font-weight: 900;
+        font-size: 1.2em;
+}
+
+.error-page h1 {
+    font-size: 6em;
+}
+
+.error-page img {
+    height:5em;
+    width:auto;
+    justify-self: center;
+    margin-bottom: 0.5em;
+}
+
+.return-link {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 8px;
+    justify-self: center;
+
+}
+
+.return-link a {
+    text-decoration: underline;
+}
+
+.not-found, .forbidden {
+margin-top: 8em;
+    display: grid;
+    grid-gap: 1em;
+    justify-items: center;
+
+}
+
+.error-p {
+    font-size: 0.7em;
+}

@@ -85,7 +85,7 @@ const AuthContextProvider = (props) => {
         },
         reset
       );
-      /*
+
       const error = await fetchData(
         `error`,
         {
@@ -94,7 +94,7 @@ const AuthContextProvider = (props) => {
         },
         null
       );
-      console.log(error);*/
+      console.log(error);
 
       if (testLogin) {
         //Authenticated

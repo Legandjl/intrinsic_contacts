@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Oops from "../components/errors/Oops";
 import Page401 from "../components/errors/Page401";
@@ -10,10 +10,9 @@ const ErrorContext = React.createContext();
 
 const ErrorContextProvider = ({ children }) => {
   const location = useLocation();
-  const [errorStatusCode, setErrorStatusCode] = React.useState();
-  console.log(errorStatusCode);
+  const [errorStatusCode, setErrorStatusCode] = useState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Listen for changes to the current location.
     // remove status code on location change
     setErrorStatusCode(undefined);
@@ -40,7 +39,7 @@ const ErrorContextProvider = ({ children }) => {
     }
 
     if (errorStatusCode > 400) {
-      return <Oops />;
+      return <Oops code={errorStatusCode} />;
     }
 
     return children;

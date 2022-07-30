@@ -59,7 +59,6 @@ const Login = () => {
       >
         Login
       </button>
-
       {loginError && <p className="login-error">Incorrect details entered</p>}
     </div>
   );
