@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { ContactContext } from "../context/ContactContext";
 
 const phones = ["HOME", "WORK", "WHATSAPP", "MOBILE"].map((category) => {
@@ -66,15 +66,33 @@ const reducer = (state, action) => {
 const useContactForm = () => {
   const [state, dispatch] = useReducer(reducer, initialFormState);
   const [loading, setLoading] = useState(true);
-  const { contacts, submitContact, formatPhoneNumber, loadingContacts } =
+  const { contacts, submitContact, submitting, loadingContacts } =
     useContext(ContactContext);
   const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const formErrors = { nameValid, emailValid };
   const { id } = useParams();
 
+  const location = useLocation();
+
   useEffect(() => {
-    if (id && loading) {
+    setLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.key]);
+
+  useEffect(() => {
+    const formatPhoneNumber = (number) => {
+      let regex = /[#-]/;
+      const splitNumber = number.phoneNumberFormatted.split(regex);
+      return {
+        category: number.category,
+        areaCode: splitNumber[1] || "",
+        countryCode: splitNumber[0] || "",
+        extension: splitNumber[3] || "",
+        number: splitNumber[2] || "",
+      };
+    };
+    if (id && !submitting && !loadingContacts) {
       const editFormState = contacts.filter((contact) => {
         return contact.id === id;
       });
@@ -92,7 +110,7 @@ const useContactForm = () => {
       });
     }
     setLoading(false);
-  }, [contacts, formatPhoneNumber, id, loading]);
+  }, [contacts, id, loadingContacts, submitting]);
 
   const handleChange = (e) => {
     const category = e.target.dataset.category;
@@ -121,7 +139,7 @@ const useContactForm = () => {
     e.preventDefault();
     await submitContact(state, id);
   };
-  return [state, handleChange, handleSubmit, handleDetail, loading];
+  return [state, handleChange, handleSubmit, handleDetail, loading, formErrors];
 };
 
 export default useContactForm;

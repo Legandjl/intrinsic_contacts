@@ -7,6 +7,7 @@ const AuthContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [fetchData, loadingData] = useFetch();
+  const [loginError, setLoginError] = useState(false);
   const LOCAL_TOKEN = "intrinsic_token";
   const LOCAL_USER = "intrinsic_user";
 
@@ -18,6 +19,7 @@ const AuthContextProvider = (props) => {
     if (loadingData) {
       return;
     }
+    setLoginError(false);
     setLoading(true);
     const loginData = await fetchData(
       "auth/login",
@@ -31,15 +33,23 @@ const AuthContextProvider = (props) => {
           password: password,
         }),
       },
-      null
+      failLogin
     );
 
-    setLocal(LOCAL_TOKEN, loginData.token);
-    setLocal(LOCAL_USER, loginData.username);
-    setUser(loginData.username);
-    setToken(loginData.token);
     setLoading(false);
-    return loginData;
+
+    if (loginData) {
+      setLocal(LOCAL_TOKEN, loginData.token);
+      setLocal(LOCAL_USER, loginData.username);
+      setUser(loginData.username);
+      setToken(loginData.token);
+      return loginData;
+    }
+  };
+
+  const failLogin = () => {
+    setLoginError(true);
+    logout();
   };
 
   const logout = () => {
@@ -51,7 +61,13 @@ const AuthContextProvider = (props) => {
 
   useEffect(() => {
     // Attempt to fetch data from a protected resource
-    const reset = () => {};
+    const reset = () => {
+      setToken(null);
+      setUser(null);
+      setLocal(LOCAL_TOKEN, "");
+      setLocal(LOCAL_USER, "");
+      setLoading(false);
+    };
     const attemptLogin = async () => {
       setLoading(true);
       const localToken = localStorage.getItem(LOCAL_TOKEN);
@@ -69,6 +85,16 @@ const AuthContextProvider = (props) => {
         },
         reset
       );
+      /*
+      const error = await fetchData(
+        `error`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${localToken}` },
+        },
+        null
+      );
+      console.log(error);*/
 
       if (testLogin) {
         //Authenticated
@@ -83,7 +109,9 @@ const AuthContextProvider = (props) => {
   }, [fetchData, loading, token, user]);
 
   return (
-    <AuthContext.Provider value={{ logout, login, token, loading, user }}>
+    <AuthContext.Provider
+      value={{ logout, login, token, loading, user, loginError }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

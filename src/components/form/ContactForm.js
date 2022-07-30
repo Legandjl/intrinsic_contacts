@@ -11,6 +11,7 @@ const ContactForm2 = () => {
     handleSubmit,
     handleDetail,
     loadingFormState,
+    errors,
   ] = useContactForm();
 
   const { id } = useParams();
@@ -25,12 +26,16 @@ const ContactForm2 = () => {
         placeholder={number.category.toLowerCase()}
         label={number.category.toLowerCase()}
         loading={loadingFormState}
+        key={number.category}
       />
     );
   });
 
   return (
     <div className="contact-form">
+      <p className="error-text">
+        {!errors.nameValid && "Contacts must have a name"}
+      </p>
       <form>
         <FormInput
           name={"company"}
@@ -57,6 +62,7 @@ const ContactForm2 = () => {
           onClick={(e) => {
             handleSubmit(e, formState.id);
           }}
+          disabled={!errors.nameValid}
         >
           {" "}
           {id ? "Update" : "Submit"}

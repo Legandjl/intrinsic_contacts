@@ -1,10 +1,10 @@
-const Country = (props) => {
-  const handleClick = () => {
+const CountrySelector = (props) => {
+  const handleClick = (e) => {
     props.handleDetail(props.country, props.category);
     props.setPlaceholder(
       `${props.country.flagCode}  ${props.country.dialCode}`
     );
-    props.toggleOff();
+    props.toggleOff(e);
   };
 
   return (
@@ -15,4 +15,4 @@ const Country = (props) => {
     >{`${props.country.flagCode} ${props.country.isoCode} ${props.country.dialCode}`}</p>
   );
 };
-export default Country;
+export default CountrySelector;

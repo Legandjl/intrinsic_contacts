@@ -3,12 +3,10 @@ import { AuthContext } from "../../context/AuthContext";
 import "./header.css";
 
 const Header = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   return (
     <div className="header">
-      <div onClick={logout} className="logout">
-        Logout
-      </div>
+      {user && <i onClick={logout} className="ri-logout-circle-line"></i>}
     </div>
   );
 };

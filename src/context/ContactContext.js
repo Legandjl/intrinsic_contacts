@@ -9,6 +9,7 @@ const ContactContext = React.createContext();
 const ContactContextProvider = (props) => {
   const { user, token } = useContext(AuthContext);
   const [fetchData, loadingData] = useFetch();
+  const [submittingContact, setSubmittingContact] = useState(false);
 
   const nav = useNavigate();
   const [contacts, refresh, loadingContacts, error, addOne, removeOne] =
@@ -44,10 +45,8 @@ const ContactContextProvider = (props) => {
     );
     const index = contacts.map((object) => object.id).indexOf(id);
     removeOne(id);
-    console.log(index);
 
     if (index === 0) {
-      console.log(id + "is 0");
       nav(`/home/welcome`, { replace: true });
       return;
     }
@@ -55,6 +54,7 @@ const ContactContextProvider = (props) => {
   };
 
   const submitContact = async (contactDetails, id) => {
+    setSubmittingContact(true);
     await fetchData(
       `contacts${id !== undefined ? `/${id}` : ""}?name=${user}`,
       {
@@ -67,20 +67,8 @@ const ContactContextProvider = (props) => {
       },
       null
     );
-
+    setSubmittingContact(false);
     refresh();
-  };
-
-  const formatPhoneNumber = (number) => {
-    let regex = /[#-]/;
-    const splitNumber = number.phoneNumberFormatted.split(regex);
-    return {
-      category: number.category,
-      areaCode: splitNumber[1] || "",
-      countryCode: splitNumber[0] || "",
-      extension: splitNumber[3] || "",
-      number: splitNumber[2] || "",
-    };
   };
 
   const getCountry = (iso) => {
@@ -101,7 +89,7 @@ const ContactContextProvider = (props) => {
         loadingContacts,
         countries,
         getCountry,
-        formatPhoneNumber,
+        submittingContact,
       }}
     >
       {props.children}

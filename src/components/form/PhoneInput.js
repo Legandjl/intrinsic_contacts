@@ -1,50 +1,46 @@
 import { useContext } from "react";
 import { ContactContext } from "../../context/ContactContext";
 import CountrySearch from "./CountrySearch";
+import EditInput from "./EditInput";
 
 const phones = {
-  home: <i class="ri-phone-fill"></i>,
-  work: <i class="ri-building-fill"></i>,
-  mobile: <i class="ri-cellphone-fill"></i>,
-  whatsapp: <i class="ri-whatsapp-fill"></i>,
+  home: <i className="ri-phone-fill"></i>,
+  work: <i className="ri-building-fill"></i>,
+  mobile: <i className="ri-cellphone-fill"></i>,
+  whatsapp: <i className="ri-whatsapp-fill"></i>,
 };
 
 const PhoneInput = (props) => {
-  const { countries, loadingCountries, loadingContacts } =
-    useContext(ContactContext);
+  const { countries } = useContext(ContactContext);
 
   return (
     <div className="form-input">
       <CountrySearch
         countries={countries}
         data={props.data}
-        category={props.category}
         handleDetail={props.handleDetail}
-        loadingFormState={props.loadingFormState}
+        category={props.category}
       />
       <div className="phone-input-wrap">
-        <input
-          className="phone-input"
-          data-category={props.category}
-          name={"number"}
-          type="text"
-          value={props.data.number}
-          onChange={props.handleChange}
+        <EditInput
+          category={props.category}
+          handleChange={props.handleChange}
           placeholder={props.placeholder}
-          required
-        />{" "}
+          name={"number"}
+          class={"phone-input"}
+          inputClass={"phone-input-edit"}
+          value={props.data.number}
+        />
         {phones[props.category.toLowerCase()]}
       </div>
-
-      <input
-        className="extension-input"
-        data-category={props.category}
+      <EditInput
+        category={props.category}
+        handleChange={props.handleChange}
+        placeholder={"Ext"}
         name={"extension"}
-        type="text"
+        class={"extension-input"}
+        inputClass={"extension-input-edit"}
         value={props.data.extension}
-        onChange={props.handleChange}
-        placeholder={"Extension"}
-        required
       />
     </div>
   );

@@ -8,7 +8,6 @@ const Sidebar = () => {
   const contactLinks = contacts.map((item) => {
     return <Contact data={item} key={item.id} />;
   });
-
   return (
     <div className="sidebar">
       <SidebarHeader />

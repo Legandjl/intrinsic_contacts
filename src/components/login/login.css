@@ -1,7 +1,56 @@
-.loginWrap {
-    height:100vh;
+
+    .loginWrap {
+    
+        justify-self: center;
+        display: grid;
+        grid-row: 2;
+        align-items: center;
+        justify-items: center;
+        grid-auto-rows: min-content;
+        align-self: center;
+        grid-gap: 1em;
+        border:solid 1px rgba(0, 0, 0, 0.098);  ;
+        padding:4em;
+        border-radius: 9px;
+        box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+           background-color: white;
+           height:14em;
+      }
+
+  .login-input {
+    border: solid 1px rgba(0, 0, 0, 0.098);  
+    font-size: 0.9em;
+    width:12em;
     display: grid;
-    align-content: center;
-    background-color: white;
+    align-items: center;
+    padding:6px;
+    padding-left: 8px;
+    font-size: 0.9em;
+    border-radius: 6px;
+
+
+
+  } 
+
+  .login-button {
+    width:6em;
+    border: solid 1px rgba(173, 169, 169, 0.425);
     justify-self: center;
+    height:2em;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+
+.login-button:active {
+    box-shadow: none;
+
+}
+
+
+.login-error {
+    font-size: 0.8em;
 }

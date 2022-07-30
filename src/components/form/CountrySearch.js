@@ -1,39 +1,49 @@
-import { useContext, useEffect, useState } from "react";
-import { ContactContext } from "../../context/ContactContext";
-import useInput from "../../hooks/useInput";
-import useShowMenu from "../../hooks/useShowMenu";
-import Country from "./Country";
+import { useEffect, useState } from "react";
 
-const CountrySearch = ({
-  countries,
-  data,
-  handleDetail,
-  category,
-  loadingFormState,
-}) => {
+import useInput from "../../hooks/useInput";
+import useInputFocus from "../../hooks/useInputFocus";
+import useShowMenu from "../../hooks/useShowMenu";
+import CountrySelector from "./CountrySelector";
+
+const CountrySearch = ({ countries, data, handleDetail, category }) => {
   const [showMenu, toggleOn, toggleOff] = useShowMenu();
   const [countryValue, handleChange, reset, isValid] = useInput();
   const [placeholder, setPlaceholder] = useState(null);
+  const [countriesFiltered, setCountriesFiltered] = useState(countries);
+  const [callbackRef] = useInputFocus();
 
   useEffect(() => {
-    const placeholder = countries.filter((country) => {
-      return country.isoCode === data.countryCode;
-    });
-    if (placeholder.length > 0) {
-      setPlaceholder(placeholder[0].flagCode + " " + placeholder[0].dialCode);
-    } else {
-      setPlaceholder(`${countries[233].flagCode}  ${countries[233].dialCode}`);
+    if (countries.length > 0) {
+      const placeholder = countries.filter((country) => {
+        return country.isoCode === data.countryCode;
+      });
+      if (placeholder.length > 0) {
+        setPlaceholder(placeholder[0].flagCode + " " + placeholder[0].dialCode);
+      } else {
+        setPlaceholder(
+          `${countries[233].flagCode}  ${countries[233].dialCode}`
+        );
+      }
     }
   }, [countries, data.countryCode]);
 
-  const countryElements = countries.map((country) => {
+  useEffect(() => {
+    setCountriesFiltered((prev) => {
+      return countries.filter((country) => {
+        return country.isoCode.includes(countryValue.toUpperCase());
+      });
+    });
+  }, [countries, countryValue]);
+
+  const countryElements = countriesFiltered.map((country) => {
     return (
-      <Country
+      <CountrySelector
         country={country}
         handleDetail={handleDetail}
         category={category}
         setPlaceholder={setPlaceholder}
         toggleOff={toggleOff}
+        key={country.isoCode}
       />
     );
   });
@@ -46,15 +56,16 @@ const CountrySearch = ({
 
   return (
     <div
-      onClick={() => {
+      onClick={(e) => {
         if (!showMenu) {
-          toggleOn();
+          toggleOn(e);
         }
       }}
       className="country-menu"
     >
       {showMenu ? (
         <input
+          ref={callbackRef}
           data-menu={true}
           className="search-box"
           type={"text"}

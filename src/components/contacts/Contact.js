@@ -15,7 +15,7 @@ const Contact = (props) => {
             onClick={() => {
               removeContact(props.data.id);
             }}
-            class="ri-delete-bin-2-fill"
+            className="ri-delete-bin-2-fill"
           ></i>
         </div>
       </div>

@@ -1,14 +1,23 @@
 .header {
     height:4em;
-    width:100%;
- 
+    width:100%; 
     display: grid;
     padding-left: 2em;
     padding-right: 2em;
     position: fixed;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-    grid-template-columns: auto 1fr;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    border: solid 1px rgba(173, 169, 169, 0.425);
+    background-color: white;
 
 }
 
+.header i {
+    align-self: center;
+    justify-self: end;
+    margin-right: 5em;
+    font-size: 1.2em;
+    font-weight: 900;
+    cursor: pointer;
+ 
+    
+}

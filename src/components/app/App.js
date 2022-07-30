@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "../../context/AuthContext";
 import { ContactContextProvider } from "../../context/ContactContext";
+import { ErrorContextProvider } from "../../context/ErrorContext";
 
 import ContactForm2 from "../form/ContactForm";
 import Header from "../header/Header";
@@ -33,23 +34,25 @@ import "./App.css";
 
 const App = () => {
   return (
-    <AuthContextProvider>
-      <ContactContextProvider>
-        <div className="App">
-          <Header />
-          <Routes>
-            <Route element={<Protected />}>
-              <Route path="home" element={<Home />}>
-                <Route path="welcome" element={<p></p>} />
-                <Route path="contact/:id" element={<ContactForm2 />} />
-                <Route path="contact/new" element={<ContactForm2 />} />
+    <ErrorContextProvider>
+      <AuthContextProvider>
+        <ContactContextProvider>
+          <div className="App">
+            <Header />
+            <Routes>
+              <Route element={<Protected />}>
+                <Route path="home" element={<Home />}>
+                  <Route path="welcome" element={<p></p>} />
+                  <Route path="contact/:id" element={<ContactForm2 />} />
+                  <Route path="contact/new" element={<ContactForm2 />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path={"/"} element={<Login />} />
-          </Routes>
-        </div>
-      </ContactContextProvider>
-    </AuthContextProvider>
+              <Route path={"/"} element={<Login />} />
+            </Routes>
+          </div>
+        </ContactContextProvider>
+      </AuthContextProvider>
+    </ErrorContextProvider>
   );
 };
 
