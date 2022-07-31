@@ -12,17 +12,15 @@ const useFetch = () => {
     options.mode = "cors";
     const url = `https://interview.intrinsiccloud.net/${params}`;
     setLoading(true);
-
     const data = await fetch(url, options);
-
     if (data.status > 400) {
-      console.log("err");
       if (!cb) {
         updateCode(data.status);
         updateText(data.statusText);
       } else {
         cb();
       }
+      setLoading(false);
     } else {
       const jsonData = await data.json();
       setLoading(false);

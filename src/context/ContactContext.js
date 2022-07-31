@@ -26,7 +26,6 @@ const ContactContextProvider = (props) => {
     `utility/countries`,
     {
       method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
     },
     null
   );

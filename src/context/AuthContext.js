@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 const AuthContext = React.createContext();
 
@@ -35,16 +35,13 @@ const AuthContextProvider = (props) => {
       },
       failLogin
     );
-
-    setLoading(false);
-
     if (loginData) {
       setLocal(LOCAL_TOKEN, loginData.token);
       setLocal(LOCAL_USER, loginData.username);
       setUser(loginData.username);
       setToken(loginData.token);
-      return loginData;
     }
+    setLoading(false);
   };
 
   const failLogin = () => {
@@ -52,52 +49,33 @@ const AuthContextProvider = (props) => {
     logout();
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setToken(null);
     setUser(null);
     setLocal(LOCAL_TOKEN, "");
     setLocal(LOCAL_USER, "");
-  };
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
-    // Attempt to fetch data from a protected resource
-    const reset = () => {
-      setToken(null);
-      setUser(null);
-      setLocal(LOCAL_TOKEN, "");
-      setLocal(LOCAL_USER, "");
-      setLoading(false);
-    };
     const attemptLogin = async () => {
       setLoading(true);
       const localToken = localStorage.getItem(LOCAL_TOKEN);
       const localUser = localStorage.getItem(LOCAL_USER);
       if (!localToken || !localUser) {
-        reset();
+        logout();
         return;
       }
-
       const testLogin = await fetchData(
         `profile?name=${localUser}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${localToken}` },
         },
-        reset
+        logout
       );
-
-      /*const error = await fetchData(
-        `error`,
-        {
-          method: "GET",
-          headers: { Authorization: `Bearer ${localToken}` },
-        },
-        null
-      );
-      console.log(error);*/
 
       if (testLogin) {
-        //Authenticated
         setToken(localToken);
         setUser(localUser);
       }
@@ -106,7 +84,7 @@ const AuthContextProvider = (props) => {
     if (loading && !token) {
       attemptLogin();
     }
-  }, [fetchData, loading, token, user]);
+  }, [fetchData, loading, logout, token, user]);
 
   return (
     <AuthContext.Provider
