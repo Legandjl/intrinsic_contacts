@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/intrinsic_contacts/static/css/main.1feb4f78.css",
+    "main.js": "/intrinsic_contacts/static/js/main.5dd8c44c.js",
+    "static/media/remixicon.svg?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.9cedd2150922ead84869.svg",
+    "static/media/remixicon.eot?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.5cb99e6cba5a4619063f.eot",
+    "static/media/remixicon.ttf?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.f2616f597cf98f38d234.ttf",
+    "static/media/angry.png": "/intrinsic_contacts/static/media/angry.72ae226f1ffb224f74ab.png",
+    "static/media/teapot.png": "/intrinsic_contacts/static/media/teapot.0e522bed4f19c634a205.png",
+    "static/media/icon.png": "/intrinsic_contacts/static/media/icon.3e29a2a6aa44e1c8c33a.png",
+    "static/media/remixicon.woff?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.8d09fa11700ed63cf96e.woff",
+    "static/media/sad.png": "/intrinsic_contacts/static/media/sad.0f8c43a7f4ee35d0302f.png",
+    "static/media/remixicon.woff2?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.90668f6f9b3c2c18a090.woff2",
+    "index.html": "/intrinsic_contacts/index.html",
+    "main.1feb4f78.css.map": "/intrinsic_contacts/static/css/main.1feb4f78.css.map",
+    "main.5dd8c44c.js.map": "/intrinsic_contacts/static/js/main.5dd8c44c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1feb4f78.css",
+    "static/js/main.5dd8c44c.js"
+  ]
+}
