@@ -13,16 +13,18 @@ const useFetch = () => {
     const url = `https://interview.intrinsiccloud.net/${params}`;
     setLoading(true);
     const data = await fetch(url, options);
+    const jsonData = await data.json();
     if (data.status > 400) {
       if (!cb) {
+        console.log(data);
+        console.log(jsonData);
         updateCode(data.status);
-        updateText(data.statusText);
+        updateText(jsonData.message);
       } else {
         cb();
       }
       setLoading(false);
     } else {
-      const jsonData = await data.json();
       setLoading(false);
       return jsonData;
     }

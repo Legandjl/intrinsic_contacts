@@ -28,7 +28,7 @@ const Header = () => {
       <div className="header-functions">
         {user && (
           <Link to={"/profile"}>
-            <i class="ri-user-2-fill"></i>
+            <i className="ri-user-2-fill"></i>
           </Link>
         )}
         {user && <i onClick={logout} className="ri-logout-circle-line"></i>}
