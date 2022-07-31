@@ -6,7 +6,7 @@ const Page401 = () => {
   const nav = useNavigate();
   useEffect(() => {
     nav(`/unauthorised`, { replace: true });
-  }, []);
+  }, [nav]);
 
   return <div className="error-page"></div>;
 };

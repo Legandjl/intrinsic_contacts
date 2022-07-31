@@ -1,25 +1,13 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./errors.css";
-import angry from "./angry.png";
+import { useEffect } from "react";
 
 const Page403 = () => {
-  return (
-    <div className="error-page">
-      {" "}
-      <div className="forbidden">
-        <h1>403</h1>
-        <img alt="angry" src={angry} />
-        <h2>Forbidden</h2>
-        <p className="error-p">
-          You do not have permission to access this resource
-        </p>
-        <div className="return-link">
-          <p>Return</p>
-          <Link to={"/home"}>Home</Link>
-        </div>
-      </div>
-    </div>
-  );
+  const nav = useNavigate();
+  useEffect(() => {
+    nav(`/forbidden`, { replace: true });
+  }, [nav]);
+  return <div className="error-page"></div>;
 };
 
 export default Page403;

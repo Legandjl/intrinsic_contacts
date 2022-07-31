@@ -33,7 +33,6 @@ const ErrorContextProvider = ({ children }) => {
     }
 
     if (errorStatusCode === 403) {
-      console.log("403");
       return <Page403 />;
     }
 
@@ -47,9 +46,8 @@ const ErrorContextProvider = ({ children }) => {
 
     if (errorStatusCode > 400) {
       return <Oops code={errorStatusCode} />;
-    } else {
-      return children;
     }
+    return children;
   };
 
   return (

@@ -27,7 +27,7 @@ const Login = () => {
   }, [contacts, loading, loadingContacts, loadingCountries, nav, token]);
 
   return (
-    <div className="loginWrap">
+    <div className="login-wrap">
       <img alt={"icon"} src={icon} />
 
       <input

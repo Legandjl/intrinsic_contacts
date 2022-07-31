@@ -35,6 +35,7 @@ const AuthContextProvider = (props) => {
       },
       failLogin
     );
+
     if (loginData) {
       setLocal(LOCAL_TOKEN, loginData.token);
       setLocal(LOCAL_USER, loginData.username);

@@ -1,5 +1,5 @@
 
-    .loginWrap {
+    .login-wrap {
     
         justify-self: center;
         display: grid;
@@ -53,4 +53,9 @@
 
 .login-error {
     font-size: 0.8em;
+}
+
+.login-wrap img {
+    width:4em;
+    height: auto;
 }
