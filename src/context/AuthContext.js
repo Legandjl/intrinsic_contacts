@@ -4,7 +4,7 @@ const AuthContext = React.createContext();
 
 const AuthContextProvider = (props) => {
   const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [fetchData, loadingData] = useFetch();
   const [loginError, setLoginError] = useState(false);
@@ -86,7 +86,7 @@ const AuthContextProvider = (props) => {
         reset
       );
 
-      const error = await fetchData(
+      /*const error = await fetchData(
         `error`,
         {
           method: "GET",
@@ -94,7 +94,7 @@ const AuthContextProvider = (props) => {
         },
         null
       );
-      console.log(error);
+      console.log(error);*/
 
       if (testLogin) {
         //Authenticated
@@ -103,7 +103,7 @@ const AuthContextProvider = (props) => {
       }
       setLoading(false);
     };
-    if (!loading && !token) {
+    if (loading && !token) {
       attemptLogin();
     }
   }, [fetchData, loading, token, user]);

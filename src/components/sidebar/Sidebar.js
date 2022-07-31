@@ -1,23 +1,22 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { ContactContext } from "../../context/ContactContext";
 import Contact from "../contacts/Contact";
 import "./sidebar.css";
 import SidebarHeader from "./SidebarHeader";
 const Sidebar = () => {
   const { contacts } = useContext(ContactContext);
-  const [filteredContacts, setFilteredContacts] = useState(contacts);
+  const [filterVal, setFilterVal] = useState("");
 
-  const handleFilter = (searchStr) => {
-    const filtered = contacts.filter((c) => {
-      const name = c.contactName.toLowerCase();
-      const str = searchStr.toLowerCase();
-      return name.includes(str);
-    });
-    setFilteredContacts(filtered);
-  };
+  const handleFilter = useCallback((searchStr) => {
+    setFilterVal(searchStr);
+  }, []);
 
-  const contactLinks = filteredContacts.map((item) => {
-    return <Contact data={item} key={item.id} />;
+  const contactLinks = contacts.map((item) => {
+    return (
+      item.contactName.toLowerCase().includes(filterVal.toLowerCase()) && (
+        <Contact data={item} key={item.id} />
+      )
+    );
   });
   return (
     <div className="sidebar">

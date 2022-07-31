@@ -45,3 +45,8 @@ margin-top: 8em;
 .error-p {
     font-size: 0.7em;
 }
+
+.unauthorised {
+    align-self: center;
+    display: grid;
+}

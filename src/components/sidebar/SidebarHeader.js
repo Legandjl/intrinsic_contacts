@@ -8,12 +8,18 @@ const SidebarHeader = (props) => {
 
   useEffect(() => {
     props.handleFilter(value);
-  }, [props, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   useEffect(() => {
     reset();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
+
+  const filter = (e) => {
+    handleChange(e);
+    props.handleFilter(value + e.target.value);
+  };
 
   return (
     <div className="sidebar-header">
@@ -22,7 +28,9 @@ const SidebarHeader = (props) => {
           className={"user-search"}
           type="text"
           value={value}
-          onChange={handleChange}
+          onChange={(e) => {
+            filter(e);
+          }}
           placeholder={"Search contacts..."}
         />
       </div>

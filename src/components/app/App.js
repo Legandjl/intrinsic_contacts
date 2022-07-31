@@ -2,9 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "../../context/AuthContext";
 import { ContactContextProvider } from "../../context/ContactContext";
 import { ErrorContextProvider } from "../../context/ErrorContext";
+import Unauthorised from "../errors/Unauthorised";
 import ContactForm2 from "../form/ContactForm";
 import Header from "../header/Header";
 import Home from "../home/Home";
+import SubmitLoader from "../loaders/SubmitLoader";
 import Login from "../login/Login";
 import Protected from "../protected/Protected";
 
@@ -23,8 +25,13 @@ const App = () => {
                   <Route path="welcome" element={<p></p>} />
                   <Route path="contact/:id" element={<ContactForm2 />} />
                   <Route path="contact/new" element={<ContactForm2 />} />
+                  <Route
+                    path="contact/submit/success"
+                    element={<SubmitLoader />}
+                  />
                 </Route>
               </Route>
+              <Route path={"/unauthorised"} element={<Unauthorised />} />
               <Route path={"/"} element={<Login />} />
             </Routes>
           </ContactContextProvider>

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { ContactContext } from "../../context/ContactContext";
 import useContactForm from "../../hooks/useContactForm";
 import "./form.css";
 import FormInput from "./FormInput";
@@ -13,6 +15,8 @@ const ContactForm2 = () => {
     loadingFormState,
     errors,
   ] = useContactForm();
+
+  const { submittingContact } = useContext(ContactContext);
 
   const { id } = useParams();
 
@@ -34,7 +38,7 @@ const ContactForm2 = () => {
   return (
     <div className="contact-form">
       <p className="error-text">
-        {!errors.nameValid && "Contacts must have a name"}
+        {!errors.nameValid && !submittingContact && "Contacts must have a name"}
       </p>
       <form>
         <FormInput

@@ -3,7 +3,7 @@ import { ErrorContext } from "../context/ErrorContext";
 
 const useFetch = () => {
   const [loading, setLoading] = useState(false);
-  const { updateCode } = useContext(ErrorContext);
+  const { updateCode, updateText } = useContext(ErrorContext);
 
   const fetchData = async (params, options, cb) => {
     //function has an optional paramater "cb"
@@ -12,16 +12,20 @@ const useFetch = () => {
     options.mode = "cors";
     const url = `https://interview.intrinsiccloud.net/${params}`;
     setLoading(true);
+
     const data = await fetch(url, options);
-    const jsonData = await data.json();
-    setLoading(false);
+
     if (data.status > 400) {
+      console.log("err");
       if (!cb) {
         updateCode(data.status);
+        updateText(data.statusText);
       } else {
         cb();
       }
     } else {
+      const jsonData = await data.json();
+      setLoading(false);
       return jsonData;
     }
   };

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ContactContext } from "../context/ContactContext";
 
 const phones = ["HOME", "WORK", "WHATSAPP", "MOBILE"].map((category) => {
@@ -66,13 +66,17 @@ const reducer = (state, action) => {
 const useContactForm = () => {
   const [state, dispatch] = useReducer(reducer, initialFormState);
   const [loading, setLoading] = useState(true);
-  const { contacts, submitContact, submitting, loadingContacts } =
-    useContext(ContactContext);
+  const {
+    contacts,
+    submitContact,
+
+    loadingContacts,
+    submittingContact,
+  } = useContext(ContactContext);
   const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const formErrors = { nameValid, emailValid };
   const { id } = useParams();
-
   const location = useLocation();
 
   useEffect(() => {
@@ -92,7 +96,7 @@ const useContactForm = () => {
         number: splitNumber[2] || "",
       };
     };
-    if (id && !submitting && !loadingContacts) {
+    if (id && !submittingContact && !loadingContacts) {
       const editFormState = contacts.filter((contact) => {
         return contact.id === id;
       });
@@ -110,7 +114,7 @@ const useContactForm = () => {
       });
     }
     setLoading(false);
-  }, [contacts, id, loadingContacts, submitting]);
+  }, [contacts, id, loadingContacts, submittingContact]);
 
   const handleChange = (e) => {
     const category = e.target.dataset.category;

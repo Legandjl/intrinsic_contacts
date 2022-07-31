@@ -3,6 +3,8 @@ import "./errors.css";
 import angry from "./angry.png";
 
 const Page403 = () => {
+  console.log("rendering");
+
   return (
     <div className="error-page">
       {" "}
