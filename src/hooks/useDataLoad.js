@@ -30,6 +30,7 @@ const useDataLoad = (url, options) => {
   useEffect(() => {
     const startLoad = async () => {
       const jsonData = await fetchData(url, options, null);
+
       setData(jsonData);
       setLoading(false);
     };
