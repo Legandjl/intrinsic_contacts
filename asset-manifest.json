@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/intrinsic_contacts/static/css/main.3ea204f8.css",
+    "main.css": "/intrinsic_contacts/static/css/main.0a5245ed.css",
     "main.js": "/intrinsic_contacts/static/js/main.f0ed623a.js",
     "static/media/remixicon.svg?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.9cedd2150922ead84869.svg",
     "static/media/remixicon.eot?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.5cb99e6cba5a4619063f.eot",
@@ -12,11 +12,11 @@
     "static/media/sad.png": "/intrinsic_contacts/static/media/sad.0f8c43a7f4ee35d0302f.png",
     "static/media/remixicon.woff2?t=1590207869815": "/intrinsic_contacts/static/media/remixicon.90668f6f9b3c2c18a090.woff2",
     "index.html": "/intrinsic_contacts/index.html",
-    "main.3ea204f8.css.map": "/intrinsic_contacts/static/css/main.3ea204f8.css.map",
+    "main.0a5245ed.css.map": "/intrinsic_contacts/static/css/main.0a5245ed.css.map",
     "main.f0ed623a.js.map": "/intrinsic_contacts/static/js/main.f0ed623a.js.map"
   },
   "entrypoints": [
-    "static/css/main.3ea204f8.css",
+    "static/css/main.0a5245ed.css",
     "static/js/main.f0ed623a.js"
   ]
 }
