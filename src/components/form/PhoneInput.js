@@ -12,7 +12,6 @@ const phones = {
 
 const PhoneInput = (props) => {
   const { countries } = useContext(ContactContext);
-
   return (
     <div className="form-input">
       <CountrySearch

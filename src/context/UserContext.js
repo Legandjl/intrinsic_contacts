@@ -9,6 +9,7 @@ const UserContextProvider = (props) => {
   const [profile, refreshProfile] = useDataLoad(
     `profile?name=${user}`,
     {
+      "Content-Type": "application/json",
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     },

@@ -108,12 +108,13 @@ i {
     height:16em;
   }
 
-  .password-input {font-size: 1em;}
+  .password-input {font-size: 1.1em;}
 
   .pwd-button {
-    width:8em;
+    width:6em;
+    font-size: 1.1em;
 
-    height:2.2em;
+    height:2em;
   
   }
   
