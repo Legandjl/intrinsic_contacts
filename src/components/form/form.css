@@ -47,7 +47,7 @@
 .input-edit-display  {
     border-bottom: solid 1px rgba(0, 0, 0, 0.098);  
     grid-column: 1/-1;
-    padding-left: 2em;
+
     align-items: center;
     display: grid;
     padding-bottom: 5px;
@@ -194,4 +194,23 @@ label {
     color:rgba(190, 15, 15, 0.518);
 
 
+}
+
+@media (min-width: 1920px) and (max-width: 2560px)  {
+
+    .contact-form {
+        font-size: 1.3em;
+    }
+
+    .form-input i {
+        font-size: 1.3em;
+    }
+
+    .phone-input-edit, .input-edit-display , .phone-input, .general-input {
+        padding-left: 40px;
+    }
+    .submit-button {
+        width:8em;
+        height:2.5em;
+    }
 }
