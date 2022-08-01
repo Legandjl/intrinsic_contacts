@@ -38,7 +38,6 @@ const Profile = () => {
       const imgSrc = `${data.url}?${new Date()}`;
       loadImage(imgSrc);
       setProfilePic(imgSrc);
-
       if (data.status > 400) {
         updateCode(data.status);
       }
