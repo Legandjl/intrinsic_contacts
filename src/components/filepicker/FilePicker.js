@@ -1,8 +1,7 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 const FilePicker = (props) => {
-  const [icon, setIcon] = useState("ri-add-box-line");
   const hiddenFileSelect = useRef(null);
   const { user, token } = useContext(AuthContext);
 
@@ -28,7 +27,10 @@ const FilePicker = (props) => {
 
   return (
     <div className="filepicker-wrap">
-      <i className={icon} onClick={() => hiddenFileSelect.current.click()}>
+      <i
+        className={"ri-add-box-line"}
+        onClick={() => hiddenFileSelect.current.click()}
+      >
         <input
           ref={hiddenFileSelect}
           type="file"

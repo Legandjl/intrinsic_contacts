@@ -16,12 +16,10 @@ const useFetch = () => {
     const jsonData = await data.json();
     if (data.status > 400) {
       if (!cb) {
-        console.log(data);
-        console.log(jsonData);
         updateCode(data.status);
         updateText(jsonData.message);
       } else {
-        cb();
+        cb(jsonData);
       }
       setLoading(false);
     } else {

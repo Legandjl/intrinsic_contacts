@@ -6,7 +6,7 @@ const UserContext = React.createContext();
 const UserContextProvider = (props) => {
   const { user, token } = useContext(AuthContext);
 
-  const [profile, refreshProfile, loadingProfile] = useDataLoad(
+  const [profile, refreshProfile] = useDataLoad(
     `profile?name=${user}`,
     {
       method: "GET",

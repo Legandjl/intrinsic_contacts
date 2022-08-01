@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { ContactContext } from "../context/ContactContext";
 
 const phones = ["HOME", "WORK", "WHATSAPP", "MOBILE"].map((category) => {

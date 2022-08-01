@@ -6,8 +6,14 @@
     align-content: center;
     display: grid;
     grid-gap: 5px;
+    height:100%;
 }
 
+.profile-wrap h1 {
+    font-weight: 900;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
 .profile-inner{
     display: grid;
     grid-gap: 10px;
@@ -47,9 +53,19 @@
     margin-top: 1em;
     margin-bottom: 1em;
   }
+  .pwd-button:active {
+
+    box-shadow: none;
+
+  }
 
   .image-wrap {
     position: relative;
+  }
+
+  .image-wrap img {
+    width:12em;
+    height:12em;
   }
 
   .filepicker-wrap {
@@ -60,11 +76,19 @@
     font-size: 1.4em;
     display: grid;
     align-items: center;
-
+background-color: white;
   
   }
 
-  .filepicker-wrap i {
-    background-color: white;
+i {
+    cursor: pointer;
+  }
 
+  .pwd-error-wrap {
+    min-height: 3em;
+  }
+
+  .profile-wrap .error-text {
+    width:25em;
+    text-align: center;
   }

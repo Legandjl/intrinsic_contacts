@@ -12,6 +12,7 @@ import SubmitLoader from "../loaders/SubmitLoader";
 import Login from "../login/Login";
 import Profile from "../profile/Profile";
 import Protected from "../protected/Protected";
+import Welcome from "../welcome/Welcome";
 
 import "./App.css";
 
@@ -27,7 +28,7 @@ const App = () => {
                 <Route element={<Protected />}>
                   <Route path="profile" element={<Profile />} />
                   <Route path="home" element={<Home />}>
-                    <Route path="welcome" element={<p></p>} />
+                    <Route path="welcome" element={<Welcome />} />
                     <Route path="contact/:id" element={<ContactForm2 />} />
                     <Route path="contact/new" element={<ContactForm2 />} />
                     <Route

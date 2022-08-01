@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import useInput from "../../hooks/useInput";
 
 const SidebarHeader = (props) => {
-  const [value, handleChange, reset, isValid] = useInput();
+  const [value, handleChange, reset] = useInput();
   const location = useLocation();
 
   useEffect(() => {

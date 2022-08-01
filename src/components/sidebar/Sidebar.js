@@ -18,6 +18,7 @@ const Sidebar = () => {
       )
     );
   });
+
   return (
     <div className="sidebar">
       <SidebarHeader handleFilter={handleFilter} />

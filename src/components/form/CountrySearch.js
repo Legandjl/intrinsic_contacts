@@ -7,7 +7,7 @@ import CountrySelector from "./CountrySelector";
 
 const CountrySearch = ({ countries, data, handleDetail, category }) => {
   const [showMenu, toggleOn, toggleOff] = useShowMenu();
-  const [countryValue, handleChange, reset, isValid] = useInput();
+  const [countryValue, handleChange, reset] = useInput();
   const [placeholder, setPlaceholder] = useState(null);
   const [countriesFiltered, setCountriesFiltered] = useState(countries);
   const [callbackRef] = useInputFocus();
