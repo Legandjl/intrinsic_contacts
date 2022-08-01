@@ -4,6 +4,7 @@ import { ContactContextProvider } from "../../context/ContactContext";
 import { ErrorContextProvider } from "../../context/ErrorContext";
 import { UserContextProvider } from "../../context/UserContext";
 import Forbidden from "../errors/Forbidden";
+import Page404 from "../errors/Page404";
 import Unauthorised from "../errors/Unauthorised";
 import ContactForm2 from "../form/ContactForm";
 import Header from "../header/Header";
@@ -40,6 +41,9 @@ const App = () => {
                 <Route path={"/unauthorised"} element={<Unauthorised />} />
                 <Route path={"/forbidden"} element={<Forbidden />} />
                 <Route path={"/"} element={<Login />} />
+
+                <Route path="/404" element={<Page404 />} />
+                <Route path="*" element={<Page404 />} />
               </Routes>
             </UserContextProvider>
           </ContactContextProvider>

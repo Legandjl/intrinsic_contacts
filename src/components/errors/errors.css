@@ -6,9 +6,10 @@
         grid-gap: 15px;
         grid-row: 1;   
         justify-self: center;
-        margin-top: 20em;
+        margin-top: 5em;
         font-weight: 900;
         font-size: 1.2em;
+       height:100%;
 }
 
 .error-page h1 {

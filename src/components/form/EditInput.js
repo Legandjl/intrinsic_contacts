@@ -9,7 +9,11 @@ const EditInput = (props) => {
 
   return !showMenu && id ? (
     <div onClick={toggleOn} className={props.inputClass}>
-      <p>{props.value || props.placeholder}</p>
+      <p>
+        {props.value.length > 60
+          ? props.value.slice(0, 60) + "..."
+          : props.value || props.placeholder}
+      </p>
     </div>
   ) : (
     <input
@@ -22,6 +26,7 @@ const EditInput = (props) => {
       value={props.value}
       onChange={props.handleChange}
       placeholder={props.placeholder}
+      maxLength={props.class === "phone-input" && 30}
     />
   );
 };

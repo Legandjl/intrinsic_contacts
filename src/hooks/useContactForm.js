@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ContactContext } from "../context/ContactContext";
 
 const phones = ["HOME", "WORK", "WHATSAPP", "MOBILE"].map((category) => {
@@ -66,6 +66,8 @@ const reducer = (state, action) => {
 const useContactForm = () => {
   const [state, dispatch] = useReducer(reducer, initialFormState);
   const [loading, setLoading] = useState(true);
+  const [formError, setError] = useState(true);
+
   const {
     contacts,
     submitContact,
@@ -74,13 +76,15 @@ const useContactForm = () => {
     submittingContact,
   } = useContext(ContactContext);
   const [nameValid, setNameValid] = useState(false);
-  const [emailValid, setEmailValid] = useState(false);
-  const formErrors = { nameValid, emailValid };
+
+  const formErrors = { nameValid };
   const { id } = useParams();
   const location = useLocation();
+  const nav = useNavigate();
 
   useEffect(() => {
     setLoading(true);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.key]);
 
@@ -96,17 +100,26 @@ const useContactForm = () => {
         number: splitNumber[2] || "",
       };
     };
+
     if (id && !submittingContact && !loadingContacts) {
-      const editFormState = contacts.filter((contact) => {
+      const isValidId = contacts.filter((contact) => {
         return contact.id === id;
       });
-      const phoneNumbers = editFormState[0].phoneNumbers.map((number) => {
-        return formatPhoneNumber(number);
-      });
-      dispatch({
-        value: { ...editFormState[0], phoneNumbers: phoneNumbers },
-        type: CASES.SET_INITIAL_STATE,
-      });
+
+      if (isValidId.length > 0) {
+        const editFormState = contacts.filter((contact) => {
+          return contact.id === id;
+        });
+        const phoneNumbers = editFormState[0].phoneNumbers.map((number) => {
+          return formatPhoneNumber(number);
+        });
+        dispatch({
+          value: { ...editFormState[0], phoneNumbers: phoneNumbers },
+          type: CASES.SET_INITIAL_STATE,
+        });
+      } else {
+        nav(`/404`, { replace: true });
+      }
     } else if (!id) {
       dispatch({
         value: { ...initialFormState },
@@ -114,7 +127,7 @@ const useContactForm = () => {
       });
     }
     setLoading(false);
-  }, [contacts, id, loadingContacts, submittingContact]);
+  }, [contacts, id, loadingContacts, nav, submittingContact]);
 
   const handleChange = (e) => {
     const category = e.target.dataset.category;
@@ -136,7 +149,6 @@ const useContactForm = () => {
 
   useEffect(() => {
     setNameValid(state.contactName.length > 0);
-    setEmailValid(state.primaryEmailAddress.length > 0);
   }, [state]);
 
   const handleSubmit = async (e, id) => {

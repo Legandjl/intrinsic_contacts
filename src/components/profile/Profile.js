@@ -12,8 +12,8 @@ import "./profile.css";
 const Profile = () => {
   const { profile } = useContext(UserContext);
   const { user, token } = useContext(AuthContext);
-  const [oldPwd, setOldPwd] = useInput();
-  const [newPwd, setNewPwd] = useInput();
+  const [oldPwd, setOldPwd, resetOld] = useInput();
+  const [newPwd, setNewPwd, resetNew] = useInput();
   const [fetchData, loadingData] = useFetch();
   const [loadingProfPic, setLoadingProfPic] = useState(true);
   const [profilePic, setProfilePic] = useState(null);
@@ -75,8 +75,8 @@ const Profile = () => {
     );
     if (data) {
       setSuccess(true);
-      setNewPwd("");
-      setOldPwd("");
+      resetOld();
+      resetNew();
     }
   };
 

@@ -9,7 +9,7 @@ const Page404 = () => {
         <h1>404</h1>
         <img alt="sad" src={sad} />
         <h2>Page not found</h2>
-        <p className="error-p">The page you are looking for does not exist</p>
+        <p className="error-p">The page or resource does not exist</p>
         <div className="return-link">
           <p>Return</p>
           <Link to={"/home"}>Home</Link>

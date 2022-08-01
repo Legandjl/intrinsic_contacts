@@ -10,11 +10,13 @@
         align-self: center;
         grid-gap: 1em;
         border:solid 1px rgba(0, 0, 0, 0.098);  ;
-        padding:4em;
+        padding:2em;
         border-radius: 9px;
         box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
            background-color: white;
            height:14em;
+           align-content: center;
+        
       }
 
   .login-input {
@@ -59,3 +61,20 @@
     width:4em;
     height: auto;
 }
+
+
+@media (min-width: 1920px)  {
+
+    .login-wrap {
+        height:20em;
+        font-size: 1.2em;
+        width:15em;
+
+    }
+
+    
+  
+     
+ 
+      
+      }
