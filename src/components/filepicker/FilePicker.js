@@ -5,7 +5,7 @@ import { ErrorContext } from "../../context/ErrorContext";
 const FilePicker = (props) => {
   const hiddenFileSelect = useRef(null);
   const { user, token } = useContext(AuthContext);
-  const { updateCode, updateText } = useContext(ErrorContext);
+  const { updateCode } = useContext(ErrorContext);
 
   const handleFile = async (e, cb) => {
     const input = e.target.files[0];
