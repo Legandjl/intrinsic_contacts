@@ -12,7 +12,7 @@ const Page404 = () => {
         <p className="error-p">The page or resource does not exist</p>
         <div className="return-link">
           <p>Return</p>
-          <Link to={"/home"}>Home</Link>
+          <Link to={"/"}>Home</Link>
         </div>
       </div>
     </div>

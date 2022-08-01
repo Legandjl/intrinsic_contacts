@@ -14,8 +14,9 @@
         border-radius: 9px;
         box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
            background-color: white;
-           height:14em;
+           height:18em;
            align-content: center;
+           width:18em;
         
       }
 
@@ -66,11 +67,17 @@
 @media (min-width: 1920px)  {
 
     .login-wrap {
-        height:20em;
+        height:23em;
         font-size: 1.2em;
-        width:15em;
+        width:23em;
 
     }
+
+    .login-wrap img {
+        width:5em;
+        height: auto;
+    }
+    
 
     
   

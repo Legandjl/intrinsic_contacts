@@ -5,11 +5,15 @@
         align-items: center;
         grid-gap: 15px;
         grid-row: 1;   
-        justify-self: center;
-        margin-top: 5em;
+        justify-self: center; 
         font-weight: 900;
         font-size: 1.2em;
        height:100%;
+       grid-row: 2;
+       align-content: center;
+       
+
+       
 }
 
 .error-page h1 {
@@ -36,10 +40,12 @@
 }
 
 .not-found, .forbidden {
-margin-top: 8em;
+
     display: grid;
     grid-gap: 1em;
     justify-items: center;
+    height:100%;
+    align-items: center;
 
 }
 
@@ -50,4 +56,12 @@ margin-top: 8em;
 .unauthorised {
     align-self: center;
     display: grid;
+}
+
+@media (min-width: 1920px)   {
+
+    .error-page {
+        font-size: 1.2em;
+    }
+
 }
