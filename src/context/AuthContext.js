@@ -11,8 +11,6 @@ const AuthContextProvider = (props) => {
   const LOCAL_TOKEN = "intrinsic_token";
   const LOCAL_USER = "intrinsic_user";
 
-  console.log(token);
-
   const setLocal = (name, data) => {
     localStorage.setItem(name, data);
   };

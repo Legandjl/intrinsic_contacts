@@ -2,27 +2,28 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ErrorContext } from "../../context/ErrorContext";
 import { UserContext } from "../../context/UserContext";
-
 import useFetch from "../../hooks/useFetch";
+import useImageLoader from "../../hooks/useImageLoader";
 import useInput from "../../hooks/useInput";
 import FilePicker from "../filepicker/FilePicker";
 import ImageLoader from "../loaders/ImageLoader";
 import "./profile.css";
 
-import "./profile.css";
 const Profile = () => {
   const { profile } = useContext(UserContext);
   const { user, token } = useContext(AuthContext);
   const [oldPwd, setOldPwd] = useInput();
   const [newPwd, setNewPwd] = useInput();
   const [fetchData, loadingData] = useFetch();
-  const [loadingImg, setLoadingImg] = useState(true);
+  const [loadingProfPic, setLoadingProfPic] = useState(true);
   const [profilePic, setProfilePic] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const { updateCode, updateText } = useContext(ErrorContext);
+  const { updateCode } = useContext(ErrorContext);
 
   const uid = profile.emailAddress.replace(/\D/g, "");
+
+  const [imageLoaded, loadImage] = useImageLoader();
 
   useEffect(() => {
     const loadProfpic = async () => {
@@ -34,17 +35,19 @@ const Profile = () => {
       options.mode = "cors";
       const url = `https://interview.intrinsiccloud.net/profile/profileImage/${uid}`;
       const data = await fetch(url, options);
+      const imgSrc = `${data.url}?${new Date()}`;
+      loadImage(imgSrc);
+      setProfilePic(imgSrc);
 
-      setProfilePic(`${data.url}?${new Date()}`);
       if (data.status > 400) {
         updateCode(data.status);
       }
-      setLoadingImg(false);
+      setLoadingProfPic(false);
     };
-    if (loadingImg) {
+    if (loadingProfPic) {
       loadProfpic();
     }
-  }, [loadingImg, profilePic, token, uid, updateCode, updateText]);
+  }, [loadImage, loadingProfPic, uid, updateCode]);
 
   const handleSubmit = async () => {
     setError("");
@@ -78,20 +81,20 @@ const Profile = () => {
   };
 
   const refresh = () => {
-    setLoadingImg(true);
+    setLoadingProfPic(true);
   };
 
   return (
     <div className="profile-wrap">
       <h1>Update Profile</h1>
       <div className="image-wrap">
-        {!loadingImg ? (
+        {!loadingProfPic && imageLoaded ? (
           <img src={profilePic} alt={"profile"} key={profilePic} />
         ) : (
           <ImageLoader />
         )}
 
-        {!loadingImg && <FilePicker refresh={refresh} />}
+        {!loadingProfPic && imageLoaded && <FilePicker refresh={refresh} />}
       </div>
       <div className="profile-inner">
         <div className="username">
