@@ -92,3 +92,29 @@ i {
     width:25em;
     text-align: center;
   }
+
+  
+  @media (min-width: 1920px)  {
+
+    
+.profile-wrap h1 {
+ 
+    font-size: 1.4em;
+
+}
+
+.image-wrap img {
+    width:16em;
+    height:16em;
+  }
+
+  .password-input {font-size: 1em;}
+
+  .pwd-button {
+    width:8em;
+
+    height:2.2em;
+  
+  }
+  
+  }
