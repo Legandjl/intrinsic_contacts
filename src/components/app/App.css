@@ -190,3 +190,8 @@ select[multiple]
 
 
 
+@media (min-width: 1920px)   {
+	.App {
+	grid-template-rows: 8em 1fr auto;
+	}
+	}

@@ -9,6 +9,7 @@
     border: solid 1px rgba(173, 169, 169, 0.425);
     background-color: white;
     grid-template-columns: 1fr auto;
+    align-items: center;
 
 }
 
@@ -45,4 +46,27 @@
 
 .header-functions a {
     display: grid;
+}
+
+
+@media (min-width: 1920px)   {
+.header {
+    height:6em;
+}
+
+
+.header i {
+
+
+
+    font-size: 1.6em;
+
+ 
+    
+}
+
+.header img {
+    width: 3em;
+}
+
 }
